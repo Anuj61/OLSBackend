@@ -1,5 +1,6 @@
 
 
+const fs = require("fs")
 
 
 function login(req, res){
@@ -12,8 +13,8 @@ function login(req, res){
 
 function signUp(req, res){
 
-
-    res.write("signUp");
+    let signUpHtml  = fs.readFileSync("./views/signUp.html")
+    res.write(signUpHtml);
     res.end();
 }
 
