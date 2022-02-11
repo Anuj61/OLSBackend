@@ -1,26 +1,45 @@
-</style>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp Page</title>
+</head>
 <body>
-    <h2 class="title">Sign Up Here</h2>
-
-    <div class="logo">
-        <img src="" alt="Logo Image">
-    </div>
     <div>
-        <form action="" method="post" class="form-center">
+        <form action="saveUser">
+            <div>
+                FirstName: <input type="text" name="firstName" id="">
+            </div>
+            
+            <div>
+                Email: <input type="email" name="email" id="">
+            </div>
+
+            <div>
+                Password: <input type="password" name="password" id="">
+            </div>
+
+            <div>
+                <input type="submit" value="Signup">
+            </div>
+        </form>
+
+        <!-- <form action="" method="post" class="form-center">
             <div>
                 <div class="input-data">
-                    UserName: <input type="text" name="" id="" placeholder="UserName">
+                    UserName: <input type="text" name="userName" id="" placeholder="UserName">
                 </div>
                 <div>
-                    Email:<input type="email" name="" id="" placeholder="Email">
+                    Email:<input type="email" name="email" id="" placeholder="Email">
                 </div>
                 <div>
-                    Password: <input type="password" name="" id="" placeholder="Password">
+                    Password: <input type="password" name="password" id="" placeholder="Password">
                 </div>
                 <div>
-                    Role: <input type="radio" name="role" id="">Service Provider <input type="radio" name="role"
-                        id="">User
+                    Role: <input type="radio" name="ServiceProvider" id="role">Service Provider <input type="radio" name="User"
+                        id="role">User
                 </div>
 
                 <div>
@@ -44,10 +63,7 @@
                 <input type="submit" value="Submit">
                 <input type="reset" value="Clear">
             </div>
-        </form>
+        </form> -->
     </div>
-
-
 </body>
-
 </html>
