@@ -18,8 +18,17 @@ function signUp(req, res){
     res.end();
 }
 
+function saveUser(req, res){  //making saveUser for action in html
+
+    console.log(req.body) //printing the body of the html req
+
+    res.write("Data saved");
+    res.end();
+}
+
 //export
 
 
     module.exports.signUp = signUp
     module.exports.login = login
+    module.exports.saveUser = saveUser; //exporting saveUser

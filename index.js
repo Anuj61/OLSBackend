@@ -13,9 +13,8 @@ app.get("/", function(req, res){
 
 
 app.get("/Login", sessionController.login);
-
-
 app.get("/signUp", sessionController.signUp);
+app.post("/saveUser", sessionController.saveUser);  //using post method as the form method is of post type
 
 // app.get("/login", function(req, res){
 //     res.write("Login Page");
