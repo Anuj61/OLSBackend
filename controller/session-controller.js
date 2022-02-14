@@ -1,5 +1,6 @@
 
 
+const { append } = require("express/lib/response");
 const fs = require("fs")
 
 
@@ -20,10 +21,13 @@ function signUp(req, res){
 
 function saveUser(req, res){  //making saveUser for action in html
 
-    console.log(req.body) //printing the body of the html req
+    console.log(req.body)
 
-    res.write("Data saved");
-    res.end();
+    res.json({ //responding json type data
+        msg:"data saved",
+        status:200,
+        data:req.body
+    })
 }
 
 //export

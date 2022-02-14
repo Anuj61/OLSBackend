@@ -5,6 +5,10 @@ const sessionController = require("./controller/session-controller");
 
 const app = express();
 
+//middleware for getting data from html and parsing it
+app.use(express.json()) // use express.json() method to parse appdata
+app.use(express.urlencoded({extends:true})) //use urlencoding for parsing url data with extending all the extra special characters ex:emojis
+
 
 app.get("/", function(req, res){
     res.write("Landing Page");
