@@ -1,7 +1,7 @@
 const RoleModel = require("../model/role-model")
 
 
-
+//adding role
 module.exports.addRole = function (req,res){
     //db insert role 
 
@@ -23,10 +23,47 @@ module.exports.addRole = function (req,res){
     // res.json({msg:"role added",status:200,data:req.body})
 }
 
+//listing all roles
+module.exports.listAllRole = function(req, res){
+    RoleModel.find(function(err, roles){
+        if (err) {
+            res.json({
+                msg:"Something went wrong",
+                status:-1,
+                data: err
+            })
+        } else {
+                res.json({
+                msg:"Roles listed",
+                status:200,
+                data: roles
+            })           
+        }
+    })
+}
 
 
+module.exports.deleteRole = function(req, res){
+
+    //let roleId = req.params.roleId
 
 
+    RoleModel.deleteOne({"_id":req.params.roleId},function(err,data){
+        if (err) {
+            res.json({
+                msg:"something went wrong!",
+                status:-1,
+                data:err
+            })
+        } else {
+            res.json({
+                msg:"removed data",
+                status:200,
+                data:data
+            })
+        }
+    })
+}
 
 
 

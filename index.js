@@ -38,7 +38,8 @@ app.post("/saveUser", sessionController.saveUser);
 
 //role
 app.post("/roles", roleController.addRole);
-
+app.get("/roles", roleController.listAllRole);
+app.delete("/roles/:roleId", roleController.deleteRole);
 
 
 //server
