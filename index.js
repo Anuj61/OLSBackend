@@ -5,7 +5,8 @@ const mongoose = require("mongoose")
 const res = require("express/lib/response");
 
 const sessionController = require("./controller/session-controller");
-const roleController = require("./controller/role-controller")
+const roleController = require("./controller/role-controller");
+const categoryController = require("./controller/category-controller")
 
 const app = express();
 
@@ -42,17 +43,14 @@ app.get("/roles", roleController.listAllRole);
 app.delete("/roles/:roleId", roleController.deleteRole);
 app.put("/roles", roleController.updateRole)
 
-//server
+//category
+app.post("/category", categoryController.addCategory);
+app.get("/category", categoryController.listAllCategory);
+app.delete("/category/:categoryId", categoryController.deleteCategory);
+app.put("/category", categoryController.updateCategory);
+//category disable ask sir about updating two things at a same time
+app.put("/category/:categoryId", categoryController.disableCategory);
 
-// app.get("/login", function(req, res){
-//     res.write("Login Page");
-//     res.end();
-// })
-
-// app.get("/signup", function(req, res){
-//     res.write("SignUP page")
-//     res.end()
-// })
 
 
 app.listen(3000, function(){
