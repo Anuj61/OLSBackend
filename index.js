@@ -40,7 +40,7 @@ app.post("/saveUser", sessionController.saveUser);
 app.post("/roles", roleController.addRole);
 app.get("/roles", roleController.listAllRole);
 app.delete("/roles/:roleId", roleController.deleteRole);
-
+app.put("/roles", roleController.updateRole)
 
 //server
 
