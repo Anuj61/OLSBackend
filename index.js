@@ -12,7 +12,8 @@ const app = express();
 const subcategoryController = require("./controller/subcategory-controller");
 const addressController = require("./controller/address-controller")
 // const servicedetailController = require("./controller/servicedetail-controller")
-const providerDetailModel = require("./controller/providerdetail-controller")
+const providerDetailController = require("./controller/providerdetail-controller");
+const reviewController = require("./controller/review-controller")
 //middleware for getting data from html and parsing it
 app.use(cors());
 app.use(express.json()) // use express.json() method to parse appdata
@@ -48,10 +49,10 @@ app.delete("/roles/:roleId", roleController.deleteRole);
 app.put("/roles", roleController.updateRole)
 
 //category
-app.post("/category", categoryController.addCategory);
-app.get("/category", categoryController.listAllCategory);
-app.delete("/category/:categoryId", categoryController.deleteCategory);
-app.put("/category", categoryController.updateCategory);
+app.post("/categories", categoryController.addCategory);
+app.get("/categories", categoryController.listAllCategory);
+app.delete("/categories/:categoriesId", categoryController.deleteCategory);
+app.put("/categories", categoryController.updateCategory);
 //category disable ask sir about updating two things at a same time
 app.put("/disablecategory", categoryController.disableCategory);
 app.put("/enablecategory",categoryController.enableCategory);
@@ -64,28 +65,31 @@ app.delete("/users/:userId", userController.delUser)
 
 
 //localServiceDetail
-app.post("/subcategory", subcategoryController.addDetails)
-app.get("/subcategory", subcategoryController.listAllService)
-app.put("/subcategory", subcategoryController.updateService)
-app.delete("/subcategory/:subcategoryId", subcategoryController.delService)
+app.post("/subcategories", subcategoryController.addDetails)
+app.get("/subcategories", subcategoryController.listAllService)
+app.put("/subcategories", subcategoryController.updateService)
+app.delete("/subcategories/:subcategoriesId", subcategoryController.delService)
 
 //addressLocation  listAddress not able to list using populate
-app.post("/address", addressController.addAddress)
-app.get("/address", addressController.listAddress)
+app.post("/addresses", addressController.addAddress)
+app.get("/addresses", addressController.listAddress)
 //doubt of list address
-app.put("/address", addressController.updateAddress)
-app.delete("/address/:addressId", addressController.delAddress)
+app.put("/addresses", addressController.updateAddress)
+app.delete("/addresses/:addressesId", addressController.delAddress)
 
 //workingdetail
 // app.post("/servicedetail", servicedetailController.addServicedetail)
 
 //serviceproviderdetails
-app.post("/providerdetail",providerDetailModel.addProviderDetail)
-app.get("/providerdetail",providerDetailModel.listProviderDetail)
-app.put("/providerdetail" ,providerDetailModel.updateProivderDetails)
-app.delete("/providerdetail/:providerDetailId",providerDetailModel.deleteProviderDetails)
+app.post("/providerdetails",providerDetailController.addProviderDetail)
+app.get("/providerdetails",providerDetailController.listProviderDetail)
+app.put("/providerdetails" ,providerDetailController.updateProivderDetails)
+app.delete("/providerdetails/:providerDetailId",providerDetailController.deleteProviderDetails)
 
+//review
+app.post("/reviews",reviewController.addReviews);
+app.get("/reviews", reviewController.listReviews)
+app.put("/reviews", reviewController.updateReviews)
 app.listen(3000, function(){
     console.log("Server started at 3000 port number")
 })
-
