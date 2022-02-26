@@ -1,5 +1,5 @@
 const UserModel = require("../model/user-model")
-
+const bcrypt = require("bcrypt")
 
 
 //add
@@ -10,12 +10,13 @@ module.exports.addUser = function(req, res){
     let password = req.body.password;
     let role = req.body.role
 
+    let encryptpassword = bcrypt.hashSync(password, 10)
 
 
     let user = new UserModel({
         firstName: firstName,
         email: email,
-        password: password,
+        password: encryptpassword,
         role: role
     })
 
@@ -77,4 +78,37 @@ module.exports.delUser = function(req,res){
             res.json({msg:"Delete done",data:data, status:200})//http status code
         }
     })
+}
+
+//login
+module.exports.login  = function(req, res){
+    
+    let inputEmail = req.body.email
+    let inputPassword = req.body.password
+
+    let isCorrect = false;
+
+    UserModel.findOne({email:inputEmail}, function(err,data){
+        if(data){
+            let ans = bcrypt.compareSync(inputPassword,data.password)
+            if(ans == true){
+                isCorrect = true
+            }
+        }
+        
+        if(isCorrect == false){
+            res.json({
+                msg:"Invalid credentials",
+                status:-1,
+                data:req.body
+            })
+        }else{
+            res.json({
+                msg:"Successful login",
+                status:200,
+                data:data
+            })
+        }
+    })
+    
 }

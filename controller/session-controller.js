@@ -2,13 +2,14 @@
 
 const { append } = require("express/lib/response");
 const fs = require("fs")
-
+const bcrypt = require("bcrypt")
 
 function login(req, res){
 
 
     res.write("login");
     res.end();
+
 }
 
 

@@ -36,7 +36,7 @@ app.get("/", function(req, res){
 })
 
 //urls
-app.get("/Login", sessionController.login);
+app.get("/login", sessionController.login);
 app.get("/signUp", sessionController.signUp);
 app.post("/saveUser", sessionController.saveUser);
 //using post method as the form method is of post type
@@ -62,6 +62,7 @@ app.post("/users", userController.addUser)
 app.get("/users", userController.listAllUsers)
 app.put("/users", userController.updateUsers)
 app.delete("/users/:userId", userController.delUser)
+app.post("/login", userController.login)
 
 
 //localServiceDetail
