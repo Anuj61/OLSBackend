@@ -82,6 +82,25 @@ module.exports.updateRole = function(req, res){
     })
 }
 
+//listing rolebyId
+module.exports.listRoleById = function(req, res){
+    RoleModel.findOne({_id:req.params.roleId}, function(err,data){
+        if(err){
+            res.json({
+                msg:"Role not found",
+                data:err,
+                status:-1
+            })
+        }
+        else{
+            res.json({
+                msg:"Role Found",
+                data:data,
+                status:200
+            })
+        }
+    })
+}
 
 
 

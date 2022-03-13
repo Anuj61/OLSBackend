@@ -36,8 +36,8 @@ app.get("/", function(req, res){
 })
 
 //urls
-app.get("/login", sessionController.login);
-app.get("/signUp", sessionController.signUp);
+app.get("/login", sessionController.login);  //dummy
+app.get("/signUp", sessionController.signUp); //dummyP
 app.post("/saveUser", sessionController.saveUser);
 //using post method as the form method is of post type
 
@@ -47,6 +47,8 @@ app.post("/roles", roleController.addRole);
 app.get("/roles", roleController.listAllRole);
 app.delete("/roles/:roleId", roleController.deleteRole);
 app.put("/roles", roleController.updateRole)
+app.get("/roles/:roleId", roleController.listRoleById)
+
 
 //category
 app.post("/categories", categoryController.addCategory);
@@ -62,7 +64,7 @@ app.post("/users", userController.addUser)
 app.get("/users", userController.listAllUsers)
 app.put("/users", userController.updateUsers)
 app.delete("/users/:userId", userController.delUser)
-app.post("/login", userController.login)
+app.post("/login", userController.login )
 
 
 //localServiceDetail

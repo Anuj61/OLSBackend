@@ -16,6 +16,13 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    gender:{
+        type:String,
+    },
+    contactNumber:{
+        type:String,
+        required:true
+    },
     role:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"role",

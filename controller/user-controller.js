@@ -8,6 +8,8 @@ module.exports.addUser = function(req, res){
     let firstName = req.body.firstName;
     let email = req.body.email;
     let password = req.body.password;
+    let gender = req.body.gender;
+    let contactNumber = req.body.contactNumber
     let role = req.body.role
 
     let encryptpassword = bcrypt.hashSync(password, 10)
@@ -17,6 +19,8 @@ module.exports.addUser = function(req, res){
         firstName: firstName,
         email: email,
         password: encryptpassword,
+        gender : gender,
+        contactNumber: contactNumber,
         role: role
     })
 
@@ -88,7 +92,7 @@ module.exports.login  = function(req, res){
 
     let isCorrect = false;
 
-    UserModel.findOne({email:inputEmail}, function(err,data){
+    UserModel.findOne({email:inputEmail}).populate("role").exec(function(err,data){
         if(data){
             let ans = bcrypt.compareSync(inputPassword,data.password)
             if(ans == true){
