@@ -33,6 +33,16 @@ module.exports.listAllService = function(req,res){
     })
 }
 
+module.exports.listServiceById = function(req, res){
+    subcategoryModel.findById(req.params.subCatId).populate("category").exec(function(err,data){
+        if(err){
+            res.json({msg:"SubCategory Not Found" ,data:err ,status:-1})
+        }else{
+            res.json({msg:"SubCategory Found", data:data, status:200})
+        }
+    })
+}
+
 
 //update service
 module.exports.updateService = function(req,res){

@@ -13,7 +13,8 @@ const subcategoryController = require("./controller/subcategory-controller");
 const addressController = require("./controller/address-controller")
 // const servicedetailController = require("./controller/servicedetail-controller")
 const providerDetailController = require("./controller/providerdetail-controller");
-const reviewController = require("./controller/review-controller")
+const reviewController = require("./controller/review-controller");
+const { use } = require("bcrypt/promises");
 //middleware for getting data from html and parsing it
 app.use(cors());
 app.use(express.json()) // use express.json() method to parse appdata
@@ -39,6 +40,7 @@ app.get("/", function(req, res){
 app.get("/login", sessionController.login);  //dummy
 app.get("/signUp", sessionController.signUp); //dummyP
 app.post("/saveUser", sessionController.saveUser);
+app.post("/sendotpforpassword",sessionController.sendOtpForPassword)
 //using post method as the form method is of post type
 
 
@@ -53,8 +55,9 @@ app.get("/roles/:roleId", roleController.listRoleById)
 //category
 app.post("/categories", categoryController.addCategory);
 app.get("/categories", categoryController.listAllCategory);
-app.delete("/categories/:categoriesId", categoryController.deleteCategory);
+app.delete("/categories/:categoryId", categoryController.deleteCategory);
 app.put("/categories", categoryController.updateCategory);
+app.get("/categories/:categoryId", categoryController.listCategoryById)
 //category disable ask sir about updating two things at a same time
 app.put("/disablecategory", categoryController.disableCategory);
 app.put("/enablecategory",categoryController.enableCategory);
@@ -64,14 +67,17 @@ app.post("/users", userController.addUser)
 app.get("/users", userController.listAllUsers)
 app.put("/users", userController.updateUsers)
 app.delete("/users/:userId", userController.delUser)
-app.post("/login", userController.login )
+app.get("/users/:userId", userController.listUserById)
+
+app.post("/login", userController.login)
 
 
 //localServiceDetail
 app.post("/subcategories", subcategoryController.addDetails)
 app.get("/subcategories", subcategoryController.listAllService)
 app.put("/subcategories", subcategoryController.updateService)
-app.delete("/subcategories/:subcategoriesId", subcategoryController.delService)
+app.delete("/subcategories/:subcategoryId", subcategoryController.delService)
+app.get("/subcategories/:subCatId", subcategoryController.listServiceById)
 
 //addressLocation  listAddress not able to list using populate
 app.post("/addresses", addressController.addAddress)

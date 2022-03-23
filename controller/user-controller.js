@@ -11,6 +11,7 @@ module.exports.addUser = function(req, res){
     let gender = req.body.gender;
     let contactNumber = req.body.contactNumber
     let role = req.body.role
+    
 
     let encryptpassword = bcrypt.hashSync(password, 10)
 
@@ -48,23 +49,36 @@ module.exports.listAllUsers = function(req, res){
     })
 }
 
+//List user by ID
+module.exports.listUserById = function(req, res){
+    UserModel.findById(req.params.userId).populate("role").exec(function(err,data){
+        if(err){
+            res.json({msg:"Id not found", data:err, status:-1})
+        }else{
+            res.json({msg:"Id found", data:data, status:200})
+        }
+    })
+}
+
+
 //update a user
 module.exports.updateUsers = function(req, res){
 
     let userId = req.body.userId;
     let firstName  = req.body.firstName;
     let email = req.body.email;
+    let contactNumber = req.body.contactNumber
 
-    console.log(firstName, " ", email)
+    // console.log(firstName, " ", email)
     UserModel.updateOne(
         {_id:userId},
-        {firstName:firstName, email:email},
+        {firstName:firstName, email:email, contactNumber:contactNumber},
         function(err, data){
             if(err){
                 res.json({msg:"SMW ", data:err, status:-1})
             }
             else{
-                res.json({msg:"Update donedone",data:data, status:200})//http status code
+                res.json({msg:"Update done done",data:data, status:200})//http status code
             }
         })
 }

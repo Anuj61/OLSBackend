@@ -34,6 +34,18 @@ module.exports.listAllCategory = function(req, res){
     })
 }
 
+//list category by id
+module.exports.listCategoryById = function(req, res){
+    CategoryModel.findById(req.params.categoryId, function(err,data){
+        if(err){
+            res.json({msg:"Category not found", status:-1, data:err})
+        }
+        else{
+            res.json({msg:"Category found", status:200, data:data})
+        }
+    })
+}
+
 //update category
 module.exports.updateCategory = function(req, res){
 
@@ -56,7 +68,7 @@ module.exports.deleteCategory = function(req,res){
     
     let categoryId = req.params.categoryId
     
-    CategoryModel.deleteOne({"_id":categoryId},function(err,data){
+    CategoryModel.deleteOne({_id:categoryId},function(err,data){
         if (err) {
             res.json({
                 msg:"something went wrong!",
@@ -71,6 +83,7 @@ module.exports.deleteCategory = function(req,res){
             })
         }
     })
+
 }
 
 //disable category (update)
