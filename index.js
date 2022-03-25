@@ -85,6 +85,7 @@ app.get("/addresses", addressController.listAddress)
 //doubt of list address
 app.put("/addresses", addressController.updateAddress)
 app.delete("/addresses/:addressesId", addressController.delAddress)
+app.get("/userAddress", addressController.listAddressUser)
 
 //workingdetail
 // app.post("/servicedetail", servicedetailController.addServicedetail)
@@ -99,6 +100,7 @@ app.delete("/providerdetails/:providerDetailId",providerDetailController.deleteP
 app.post("/reviews",reviewController.addReviews);
 app.get("/reviews", reviewController.listReviews)
 app.put("/reviews", reviewController.updateReviews)
+app.put("/reivewAction", reviewController.enableDisableReviews)
 app.listen(3000, function(){
     console.log("Server started at 3000 port number")
 })

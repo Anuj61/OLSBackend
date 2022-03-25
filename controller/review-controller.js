@@ -28,7 +28,7 @@ module.exports.addReviews = function(req, res){
 
 //list reivews
 module.exports.listReviews = function(req, res){
-    reviewModel.find().populate("userId").exec(function(err, data){
+    reviewModel.find().populate("user", "firstName").populate("serviceId", "firstName").exec(function(err, data){
         if(err){
             res.json({msg:"review not listed",status:-1,data:err})
         }else{
@@ -36,6 +36,7 @@ module.exports.listReviews = function(req, res){
         }
     })
 }
+//populating with multiple foreign keys and selecting a column to view
 
 //update reivews
 module.exports.updateReviews = function(req, res){
@@ -57,6 +58,19 @@ module.exports.updateReviews = function(req, res){
                 status:200,
                 data:data
             })
+        }
+    })
+}
+
+module.exports.enableDisableReviews = function(req, res){
+    let reviewId = req.body.reviewId
+    let isActive = req.body.isActive
+
+    reviewModel.updateOne({_id:reivewId}, {isActive:!isActive}, function(err,data){
+        if(err){
+            res.json({msg:"Action Not approved", status:-1, data:err})
+        }else{
+            res.json({msg:"Action approved", status:200, data:data})
         }
     })
 }

@@ -15,6 +15,10 @@ const addressSchema = mongoose.Schema({
     },
     pincode:{
         type:Number,
+    },
+    isActive:{
+        type:Boolean,
+        default:true
     }
 
 })

@@ -21,12 +21,16 @@ let ReviewSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
-    userId:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"user",
         required:true
-    }
-
+    },
+    isActive:{
+        type:Boolean,
+        default:true
+    },
+    
 })
 
 //model
