@@ -66,7 +66,7 @@ module.exports.enableDisableReviews = function(req, res){
     let reviewId = req.body.reviewId
     let isActive = req.body.isActive
 
-    reviewModel.updateOne({_id:reivewId}, {isActive:!isActive}, function(err,data){
+    reviewModel.updateOne({_id:reviewId}, {isActive:isActive}, function(err,data){
         if(err){
             res.json({msg:"Action Not approved", status:-1, data:err})
         }else{

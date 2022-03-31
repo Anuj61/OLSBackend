@@ -112,7 +112,7 @@ module.exports.delAddress =  function(req, res){
 }
 
 
-//list users
+//list all users
 module.exports.listAddressUser = function(req, res){
 
     UserModel.find({userId: {$ne:"621296911d58558b09213a77"}},'firstName contactNumber').populate("role","roleName").exec(function(err,data){
@@ -125,3 +125,20 @@ module.exports.listAddressUser = function(req, res){
     })
 }
 // populate("user", "firstName").populate("serviceId", "firstName")
+
+//list only users
+module.exports.listUserAddress = function(req, res){
+    UserModel.find({},'firstName').where('role').equals("6213608a529f58ee8d5c3f64").populate("role").exec(function(err,data){
+        if(err){
+            res.json({msg:"Not able to list users", data:err, status:-1})
+        }else{
+            res.json(
+                {
+                    msg:"listed all the users",
+                    data:data,
+                    status:200
+                }
+            )
+        }
+    })
+}

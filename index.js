@@ -86,6 +86,7 @@ app.get("/addresses", addressController.listAddress)
 app.put("/addresses", addressController.updateAddress)
 app.delete("/addresses/:addressesId", addressController.delAddress)
 app.get("/userAddress", addressController.listAddressUser)
+app.get("/listUserAddress", addressController.listUserAddress)
 
 //workingdetail
 // app.post("/servicedetail", servicedetailController.addServicedetail)
