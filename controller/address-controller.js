@@ -1,3 +1,4 @@
+const { response } = require("express")
 const { add } = require("nodemon/lib/rules")
 const addressModel = require("../model/address-model")
 
@@ -64,11 +65,11 @@ module.exports.listAddress = function(req, res){
 module.exports.updateAddress = function(req, res){
     
     let addressId = req.body.addressId
-    let addressLocation = req.body.address
+    let addressDetails = req.body.addressDetails
     let pincode = req.body.pincode
 
 
-    addressModel.updateOne({_id: addressId}, {address:addressLocation, 
+    addressModel.updateOne({_id: addressId}, {address:addressDetails, 
      pincode:pincode
     },
     function(err,data){
@@ -93,7 +94,7 @@ module.exports.delAddress =  function(req, res){
 
     let addressId = req.params.addressId
 
-    addressModel.deleteOne({_id:addressId}, function(err,data){
+    addressModel.deleteOne({"_id":addressId}, function(err,data){
         if(err){
             res.json({
                 msg:"something went wrong",
@@ -111,19 +112,38 @@ module.exports.delAddress =  function(req, res){
     })
 }
 
+//get address By Id
+module.exports.getAddressById = function(req, res){
 
-//list all users
-module.exports.listAddressUser = function(req, res){
-
-    UserModel.find({userId: {$ne:"621296911d58558b09213a77"}},'firstName contactNumber').populate("role","roleName").exec(function(err,data){
+    addressModel.findOne({_id:req.params.addressId}).populate("userId", "firstName").exec(function(err,data){
         if(err){
-            res.json({msg:"SMW ", data:err, status:-1})
-        }
-        else{
-            res.json({msg:"Listing done",data:data, status:200})//http status code
+            res.json({
+                msg:"Not able to find Address",
+                data:err,
+                status:-1
+            })
+        }else{
+            res.json({
+                msg:"Address Found successfully",
+                data:data,
+                status:200
+            })
         }
     })
 }
+
+// //list all users
+// module.exports.listAddressUser = function(req, res){
+
+//     UserModel.find({userId: {$ne:"621296911d58558b09213a77"}},'firstName contactNumber').populate("role","roleName").exec(function(err,data){
+//         if(err){
+//             res.json({msg:"SMW ", data:err, status:-1})
+//         }
+//         else{
+//             res.json({msg:"Listing done",data:data, status:200})//http status code
+//         }
+//     })
+// }
 // populate("user", "firstName").populate("serviceId", "firstName")
 
 //list only users

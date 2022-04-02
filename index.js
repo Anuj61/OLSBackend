@@ -80,13 +80,13 @@ app.delete("/subcategories/:subcategoryId", subcategoryController.delService)
 app.get("/subcategories/:subCatId", subcategoryController.listServiceById)
 
 //addressLocation  listAddress not able to list using populate
+// app.get("/userAddress", addressController.listAddressUser)
 app.post("/addresses", addressController.addAddress)
 app.get("/addresses", addressController.listAddress)
-//doubt of list address
 app.put("/addresses", addressController.updateAddress)
-app.delete("/addresses/:addressesId", addressController.delAddress)
-app.get("/userAddress", addressController.listAddressUser)
+app.delete("/addresses/:addressId", addressController.delAddress)
 app.get("/listUserAddress", addressController.listUserAddress)
+app.get("/addressesById/:addressId",addressController.getAddressById)
 
 //workingdetail
 // app.post("/servicedetail", servicedetailController.addServicedetail)
