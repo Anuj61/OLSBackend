@@ -60,6 +60,8 @@ module.exports.listUserById = function(req, res){
     })
 }
 
+//listing only 
+
 
 //update a user
 module.exports.updateUsers = function(req, res){

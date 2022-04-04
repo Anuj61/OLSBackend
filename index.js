@@ -1,26 +1,34 @@
+//middlewares and library
 const express = require("express");
 const mongoose = require("mongoose")
 const cors = require("cors")
-
 const res = require("express/lib/response");
+const { use } = require("bcrypt/promises");
 
+
+//session (login, signUp, forgot pass)
 const sessionController = require("./controller/session-controller");
+
+//admin contorllers
 const roleController = require("./controller/role-controller");
 const categoryController = require("./controller/category-controller")
 const userController = require("./controller/user-controller")
-const app = express();
 const subcategoryController = require("./controller/subcategory-controller");
 const addressController = require("./controller/address-controller")
-// const servicedetailController = require("./controller/servicedetail-controller")
-const providerDetailController = require("./controller/providerdetail-controller");
 const reviewController = require("./controller/review-controller");
-const { use } = require("bcrypt/promises");
-//middleware for getting data from html and parsing it
+const vendorDetailController = require("./controller/vendordetail-controller")
+// const servicedetailController = require("./controller/servicedetail-controller")
+
+
+
+const app = express();
+//cors for cross origin resource sharing 
 app.use(cors());
+//middleware for getting data from html and parsing it
 app.use(express.json()) // use express.json() method to parse appdata
 app.use(express.urlencoded({extends:true})) //use urlencoding for parsing url data with extending all the extra special characters ex:emojis
 
-//database
+//database connection
 mongoose.connect('mongodb://localhost:27017/onlineLocalService', function(err){
     if(err){ 
         console.log('Error while connecting')
@@ -31,6 +39,7 @@ mongoose.connect('mongodb://localhost:27017/onlineLocalService', function(err){
 })
 
 
+//basic example of working with node servere
 app.get("/", function(req, res){
     res.write("Landing Page");
     res.end();
@@ -58,7 +67,6 @@ app.get("/categories", categoryController.listAllCategory);
 app.delete("/categories/:categoryId", categoryController.deleteCategory);
 app.put("/categories", categoryController.updateCategory);
 app.get("/categories/:categoryId", categoryController.listCategoryById)
-//category disable ask sir about updating two things at a same time
 app.put("/disablecategory", categoryController.disableCategory);
 app.put("/enablecategory",categoryController.enableCategory);
 
@@ -91,11 +99,12 @@ app.get("/addressesById/:addressId",addressController.getAddressById)
 //workingdetail
 // app.post("/servicedetail", servicedetailController.addServicedetail)
 
-//serviceproviderdetails
-app.post("/providerdetails",providerDetailController.addProviderDetail)
-app.get("/providerdetails",providerDetailController.listProviderDetail)
-app.put("/providerdetails" ,providerDetailController.updateProivderDetails)
-app.delete("/providerdetails/:providerDetailId",providerDetailController.deleteProviderDetails)
+//vendordetails
+app.post("/vendorDetails",vendorDetailController.addVendorDetails)
+app.get("/vendorDetails",vendorDetailController.listAllVendorDetails)
+app.get("/vendorDetails/:vendordetailId", vendorDetailController.listVendorDetailsById)
+// app.put("/vendorDetails", vendorDetailController)
+
 
 //review
 app.post("/reviews",reviewController.addReviews);
