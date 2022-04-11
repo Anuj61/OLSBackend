@@ -91,9 +91,14 @@ app.get("/addressesById/:addressId", addressController.getAddressById);
 app.post("/vendorDetails", vendorDetailController.addVendorDetails);
 app.get("/vendorDetails", vendorDetailController.listAllVendorDetails);
 app.get(
-  "/vendorDetails/:vendordetailId",
+  "/vendorDetails/:vendorId",
   vendorDetailController.listVendorDetailsById
 );
+app.delete(
+  "/vendorDetails/:vendorId",
+  vendorDetailController.delVendorDetailsById
+);
+app.put("/vendorDetails", vendorDetailController.updateVendorDetails);
 // app.put("/vendorDetails", vendorDetailController)
 
 //review
