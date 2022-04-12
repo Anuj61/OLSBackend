@@ -11,7 +11,6 @@ const checkAuth = require("./middleware/check-auth");
 const sessionController = require("./controller/session-controller");
 
 //admin contorllers
-const categoryController = require("./controller/category-controller");
 const userController = require("./controller/user-controller");
 const addressController = require("./controller/address-controller");
 const vendorDetailController = require("./controller/vendordetail-controller");
@@ -22,6 +21,7 @@ const roleRouter = require("./router/role.router");
 const userRouter = require("./router/user.router");
 const subcategoryRouter = require("./router/subcategory.router");
 const categoryRouter = require("./router/category.router");
+const addressRouter = require("./router/address.router");
 
 const app = express();
 //cors for cross origin resource sharing
@@ -75,17 +75,8 @@ app.post("/loginJWT", userController.loginJWT);
 //localServiceDetail
 app.use("/subcategories", subcategoryRouter);
 
-//addressLocation  listAddress not able to list using populate
-// app.get("/userAddress", addressController.listAddressUser)
-app.post("/addresses", addressController.addAddress);
-app.get("/addresses", addressController.listAddress);
-app.put("/addresses", addressController.updateAddress);
-app.delete("/addresses/:addressId", addressController.delAddress);
-app.get("/listUserAddress", addressController.listUserAddress);
-app.get("/addressesById/:addressId", addressController.getAddressById);
-
-//workingdetail
-// app.post("/servicedetail", servicedetailController.addServicedetail)
+//addressLocation
+app.use("/addresses", addressRouter);
 
 //vendordetails
 app.post("/vendorDetails", vendorDetailController.addVendorDetails);
