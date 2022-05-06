@@ -56,6 +56,7 @@ app.get("/login", sessionController.login); //dummy
 app.get("/signUp", sessionController.signUp); //dummyP
 app.post("/saveUser", sessionController.saveUser);
 app.post("/sendotpforpassword", sessionController.sendOtpForPassword);
+app.post("/checkotp", sessionController.checkOTP);
 //using post method as the form method is of post type
 
 //role
@@ -66,6 +67,7 @@ app.use("/categories", categoryRouter);
 
 //user
 app.use("/users", userRouter);
+app.put("/updateuserpass", userController.updateUserPass);
 
 app.get("/listOnlyVendors", userController.listOnlyVendors);
 

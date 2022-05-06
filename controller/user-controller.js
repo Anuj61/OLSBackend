@@ -37,6 +37,10 @@ module.exports.addUser = function (req, res) {
 //List all users
 module.exports.listAllUsers = function (req, res) {
   UserModel.find()
+    .where("role")
+    .equals("6213608a529f58ee8d5c3f64")
+    .where("roleName")
+    .equals("vendor")
     .populate("role")
     .exec(function (err, data) {
       if (err) {
@@ -180,6 +184,23 @@ module.exports.loginJWT = async function (req, res) {
       role: userData.role.roleName,
     },
   });
+};
+
+module.exports.updateUserPass = function (req, res) {
+  let email = req.body.email;
+  let password = req.body.pass;
+
+  UserModel.updateOne(
+    { email: email },
+    { password: password },
+    function (err, data) {
+      if (err) {
+        res.json({ msg: "SMW ", data: err, status: -1 });
+      } else {
+        res.json({ msg: "Update done done", data: data, status: 200 }); //http status code
+      }
+    }
+  );
 };
 
 /*
